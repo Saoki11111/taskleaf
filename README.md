@@ -2,6 +2,8 @@
 
 
 ### my colorful script
+### Completed in a week at night
+
 ### [reference book](https://www.amazon.co.jp/dp/B07JHQ9B5T/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1)
 
 * Ruby version
