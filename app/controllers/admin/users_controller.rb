@@ -1,10 +1,11 @@
 class Admin::UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+
   def index
     @users = User.all
   end
 
   def show
-    @user = User.find(params[:id])
   end
 
   def new
@@ -12,7 +13,6 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def create
@@ -26,7 +26,6 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
 
     if @user.update(user_params)
       redirect_to admin_user_path(@user), notice: "ユーザー「#{@user.name}」を更新しました。"
@@ -35,9 +34,8 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  def destory
-    @user = User.find(params[:id])
-    @user.destory
+  def destroy
+    @user.destroy
     redirect_to admin_users_url, notice: "ユーザー「#{@user.name}」を削除しました。"
   end
 
@@ -49,5 +47,9 @@ class Admin::UsersController < ApplicationController
 
   def require_admin
     redirect_to root_path unless current_user.admin?
+  end
+
+  def set_user
+    @user = User.find(params[:id])
   end
 end
