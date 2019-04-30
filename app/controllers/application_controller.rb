@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-    @currnet_user ||= User.find_by(id: sessioin[:user_id]) if session[:user_id]
+    @currnet_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
 
   def login_required

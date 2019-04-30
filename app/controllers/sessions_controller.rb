@@ -1,4 +1,4 @@
-class SesstionsController < ApplicationController
+class SessionsController < ApplicationController
   skip_before_action :login_required
 
   def new
@@ -8,10 +8,10 @@ class SesstionsController < ApplicationController
     user = User.find_by(email: session_params[:email])
 
     if user&.authenticate(session_params[:password])
-      redirect[:user_id] = user.id
+      session[:user_id] = user.id
       redirect_to root_path, notice: 'ログインしました'
     else
-      redirect :new
+      render :new
     end
   end
 
