@@ -1,8 +1,23 @@
+# frozen_string_literal: true
+
+# Application Controller
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
     @tasks = current_user.tasks.order(created_at: :desc)
+    respond_to do |format|
+      format.html
+      format.csv { send_data @tasks.generate_csv, filename: "tasks-#{Time.zone.now.strftime('%Y%m%d%S')}.csv"}
+    end
+  end
+
+  def import
+    # upload file can be registered as a task group of the logged-in user
+    current_user.tasks.import(params[:file])
+    # after importing, transition to task list screen
+    #   display a message at that time
+    redirect_to tasks_url, notice: 'タスクを追加しました'
   end
 
   def show
