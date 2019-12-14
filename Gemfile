@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -66,3 +68,6 @@ gem 'html2slim'
 gem 'bootstrap'
 gem 'rb-readline'
 gem 'rails_autolink'
+gem 'kaminari'
+gem 'pry-rails'
+gem 'ransack', github: 'activerecord-hackery/ransack'
